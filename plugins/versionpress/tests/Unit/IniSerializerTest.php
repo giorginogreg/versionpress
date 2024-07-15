@@ -19,17 +19,19 @@ class IniSerializerTest extends \PHPUnit\Framework\TestCase {
 
     /**
      * @test
+     * @expectedException Exception
      */
     public function throwsOnNonSectionedData() {
-        $this->setExpectedException('Exception');
+        $this->expectException("Exception");
         IniSerializer::serialize(["key" => "value"]);
     }
 
     /**
      * @test
+     * @expectedException Exception
      */
     public function throwsOnEmptySection() {
-        $this->setExpectedException('Exception');
+        $this->expectException("Exception");
         IniSerializer::serialize(["Section" => []]);
     }
 

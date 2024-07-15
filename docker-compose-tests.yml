@@ -15,14 +15,18 @@ services:
       WORDPRESS_DB_HOST: mysql-for-tests
       WORDPRESS_DB_PASSWORD: r00tpwd
     user: "33"
+
   mysql-for-tests:
-    image: mysql:5.7@sha256:1590f2540fd87e39605686873fb10206da4cbd7e83df2bc4110abe9fb740699e
+    image: mysql:8.0
     ports:
       - "3306:3306"
+    command: --default-authentication-plugin=mysql_native_password
     volumes:
       - db-data-for-tests:/var/lib/mysql:z
+      - ./my.cnf:/etc/mysql/conf.d/99-my.cnf
     environment:
       MYSQL_ROOT_PASSWORD: r00tpwd
+      MYSQL_AUTHENTICATION_PLUGIN: mysql_native_password
 
   tests-with-wordpress:
     image: versionpress/wordpress:cli
