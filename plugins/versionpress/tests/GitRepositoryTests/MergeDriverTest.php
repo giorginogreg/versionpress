@@ -60,8 +60,8 @@ class MergeDriverTest extends \PHPUnit\Framework\TestCase {
         $this->installMergeDriver('auto');
         file_put_contents(self::$repositoryDir . "/.gitattributes", "*.txt text");
         MergeDriverInstaller::uninstallMergeDriver(self::$repositoryDir, __DIR__ . '/../..', self::$repositoryDir);
-        $this->assertNotContains('vp-ini', file_get_contents(self::$repositoryDir . "/.git/config"));
-        $this->assertNotContains('merge=vp-ini', file_get_contents(self::$repositoryDir . "/.gitattributes"));
+        $this->assertStringNotContainsString('vp-ini', file_get_contents(self::$repositoryDir . "/.git/config"));
+        $this->assertStringNotContainsString('merge=vp-ini', file_get_contents(self::$repositoryDir . "/.gitattributes"));
     }
 
     /**
@@ -70,7 +70,7 @@ class MergeDriverTest extends \PHPUnit\Framework\TestCase {
     public function gitAttributesRemovedWhenEmpty() {
         $this->installMergeDriver('auto');
         MergeDriverInstaller::uninstallMergeDriver(self::$repositoryDir, __DIR__ . '/../..', self::$repositoryDir);
-        $this->assertFileNotExists(self::$repositoryDir . "/.gitattributes");
+        $this->assertFileDoesNotExist(self::$repositoryDir . "/.gitattributes");
     }
 
     /**
@@ -107,8 +107,8 @@ class MergeDriverTest extends \PHPUnit\Framework\TestCase {
     public function gitAttributesRemovedCorrectlyAfterUninstall() {
         $this->installMergeDriver('auto');
         MergeDriverInstaller::uninstallMergeDriver(self::$repositoryDir, __DIR__ . '/../..', self::$repositoryDir);
-        $this->assertNotContains('vp-ini', file_get_contents(self::$repositoryDir . "/.git/config"));
-        $this->assertFileNotExists(self::$repositoryDir . "/.gitattributes");
+        $this->assertStringNotContainsString('vp-ini', file_get_contents(self::$repositoryDir . "/.git/config"));
+        $this->assertFileDoesNotExist(self::$repositoryDir . "/.gitattributes");
     }
 
     /**

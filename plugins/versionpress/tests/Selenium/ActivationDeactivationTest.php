@@ -39,9 +39,9 @@ class ActivationDeactivationTest // extends SeleniumTestCase // disabled in Dock
 
         $this->waitForElement('.plugins-php #message.updated');
 
-        $this->assertFileNotExists(self::$wpAutomation->getAbspath() . '/wp-includes/wpdb.php.original');
-        $this->assertFileNotExists(self::$wpAutomation->getPluginsDir() . '/versionpress');
-        $this->assertFileNotExists(self::$testConfig->testSite->path . '/.git');
+        $this->assertFileDoesNotExist(self::$wpAutomation->getAbspath() . '/wp-includes/wpdb.php.original');
+        $this->assertFileDoesNotExist(self::$wpAutomation->getPluginsDir() . '/versionpress');
+        $this->assertFileDoesNotExist(self::$testConfig->testSite->path . '/.git');
     }
 
     //----------------------------
@@ -92,7 +92,7 @@ class ActivationDeactivationTest // extends SeleniumTestCase // disabled in Dock
     public function successfulActivationRedirectsToMainVersionPressTableAndAltersWpdbClass() {
         $wpdbFile = self::$wpAutomation->getAbspath() . '/wp-includes/wp-db.php';
         $wpdbOriginalFile = $wpdbFile . '.original';
-        $this->assertFileNotExists($wpdbOriginalFile);
+        $this->assertFileDoesNotExist($wpdbOriginalFile);
         $hashBeforeInit = md5_file($wpdbFile);
 
         $this->byCssSelector('#activate-versionpress-btn')->click();
@@ -189,7 +189,7 @@ class ActivationDeactivationTest // extends SeleniumTestCase // disabled in Dock
         $this->byCssSelector('#confirm_deactivation')->click();
         $this->assertContains('wp-admin/plugins.php', $this->url());
 
-        $this->assertFileNotExists(self::$wpAutomation->getAbspath() . '/wp-includes/wpdb.php.original');
+        $this->assertFileDoesNotExist(self::$wpAutomation->getAbspath() . '/wp-includes/wpdb.php.original');
         $this->assertFileExists(self::$testConfig->testSite->path . '/.git');
     }
 
@@ -217,10 +217,10 @@ class ActivationDeactivationTest // extends SeleniumTestCase // disabled in Dock
 
         $this->waitForElement('.plugins-php #message.updated');
 
-        $this->assertFileNotExists(self::$wpAutomation->getAbspath() . '/wp-includes/wpdb.php.original');
-        $this->assertFileNotExists(self::$wpAutomation->getPluginsDir() . '/versionpress');
-        $this->assertFileNotExists(self::$wpAutomation->getVpdbDir());
-        $this->assertFileNotExists(self::$testConfig->testSite->path . '/.git');
+        $this->assertFileDoesNotExist(self::$wpAutomation->getAbspath() . '/wp-includes/wpdb.php.original');
+        $this->assertFileDoesNotExist(self::$wpAutomation->getPluginsDir() . '/versionpress');
+        $this->assertFileDoesNotExist(self::$wpAutomation->getVpdbDir());
+        $this->assertFileDoesNotExist(self::$testConfig->testSite->path . '/.git');
     }
 
 
