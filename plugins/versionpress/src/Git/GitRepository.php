@@ -44,7 +44,7 @@ class GitRepository
      */
     public function stageAll($path = null)
     {
-        $path = $path ? $path : $this->workingDirectoryRoot;
+        $path = $path ?: $this->workingDirectoryRoot;
         $this->runShellCommand("git add -A %s", $path);
     }
 
@@ -400,7 +400,7 @@ class GitRepository
 
             if (count($filesToReset) > 0) {
                 $this->runShellCommand(
-                    sprintf("git reset HEAD %s", join(" ", array_map(['VersionPress\Utils\ProcessUtils', 'escapeshellarg'], $filesToReset)))
+                    sprintf("git reset HEAD %s", join(" ", array_map([\VersionPress\Utils\ProcessUtils::class, 'escapeshellarg'], $filesToReset)))
                 );
             }
 
@@ -495,7 +495,7 @@ class GitRepository
         $command = Strings::startsWith($command, "git ") ? substr($command, 4) : $command;
         $command = ProcessUtils::escapeshellarg($this->gitBinary) . " " . $command;
 
-        $escapedArgs = @array_map(['VersionPress\Utils\ProcessUtils', 'escapeshellarg'], $args);
+        $escapedArgs = @array_map([\VersionPress\Utils\ProcessUtils::class, 'escapeshellarg'], $args);
         $commandWithArguments = vsprintf($command, $escapedArgs);
 
         $result = $this->runProcess($commandWithArguments);
