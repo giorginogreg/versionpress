@@ -3,7 +3,10 @@
   <coverage/>
   <logging>
     <testdoxText outputFile="/var/opt/versionpress/logs/testdox.txt"/>
+    <testdoxHtml outputFile="/var/opt/versionpress/logs/testdox.html"/>
+    <junit outputFile="/var/opt/versionpress/logs/unit_report.xml"/>
   </logging>
+
   <testsuites>
     <testsuite name="Unit">
       <directory>Unit</directory>

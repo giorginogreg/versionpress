@@ -10,11 +10,12 @@ services:
       - "80:80"
     volumes:
       - wordpress-files:/var/www/html:z
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     working_dir: /var/www/html/wptest
     environment:
       WORDPRESS_DB_HOST: mysql-for-tests
       WORDPRESS_DB_PASSWORD: r00tpwd
-    user: "33"
 
   mysql-for-tests:
     image: mysql:8.0
@@ -23,7 +24,6 @@ services:
     command: --default-authentication-plugin=mysql_native_password
     volumes:
       - db-data-for-tests:/var/lib/mysql:z
-      - ./my.cnf:/etc/mysql/conf.d/99-my.cnf
     environment:
       MYSQL_ROOT_PASSWORD: r00tpwd
       MYSQL_AUTHENTICATION_PLUGIN: mysql_native_password
@@ -33,7 +33,10 @@ services:
     environment:
       VP_DIR: /opt/versionpress
       PHP_IDE_CONFIG: serverName=VersionPress-tests
+      XDEBUG_SESSION: 1
     user: "33"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     volumes:
       # !!! This must be kept in sync with wordpress-cli-image/Dockerfile
       - wordpress-files:/var/www/html:z
@@ -49,6 +52,9 @@ services:
     environment:
       VP_DIR: /opt/versionpress
       PHP_IDE_CONFIG: serverName=VersionPress-tests
+      XDEBUG_SESSION: 1
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     volumes:
       # !!! This must be kept in sync with wordpress-cli-image/Dockerfile
       - wordpress-files:/var/www/html:z
