@@ -2,9 +2,6 @@
 
 namespace VersionPress\Tests\Unit;
 
-use PHPUnit_Framework_MockObject_Matcher_AnyInvokedCount;
-use PHPUnit_Framework_MockObject_MockObject;
-use PHPUnit_Framework_MockObject_Stub_Return;
 use VersionPress\Database\DbSchemaInfo;
 use VersionPress\Database\ParsedQueryData;
 use VersionPress\Database\SqlQueryParser;

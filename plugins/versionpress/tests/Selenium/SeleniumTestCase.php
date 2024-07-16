@@ -2,8 +2,6 @@
 
 namespace VersionPress\Tests\Selenium;
 
-use PHPUnit_Extensions_Selenium2TestCase;
-use PHPUnit_Extensions_Selenium2TestCase_WebDriverException;
 use VersionPress\Tests\Automation\WpAutomation;
 use VersionPress\Tests\Utils\TestConfig;
 

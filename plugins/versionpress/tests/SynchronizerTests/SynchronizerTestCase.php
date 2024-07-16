@@ -2,8 +2,6 @@
 
 namespace VersionPress\Tests\SynchronizerTests;
 
-use PHPUnit_Framework_MockObject_Generator;
-use VersionPress\Actions\ActionsInfo;
 use VersionPress\Actions\ActionsInfoProvider;
 use VersionPress\ChangeInfos\ChangeInfoFactory;
 use VersionPress\Database\Database;
