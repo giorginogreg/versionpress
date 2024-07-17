@@ -26,6 +26,7 @@ RUN apk add --no-cache $PHPIZE_DEPS \
     echo 'xdebug.client_host=host.docker.internal'; \
     echo 'xdebug.client_port=9003'; \
     echo 'xdebug.mode=debug'; \
+    echo 'xdebug.profiler_enable = 0'; \
     } >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
 # Docker mounts all volumes as root (moby/moby#2259) but we'll be running as UID 33. As a workaround,
