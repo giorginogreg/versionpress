@@ -607,8 +607,8 @@ function vp_admin_post_confirm_deactivation() {
 
     $filesChangedByDeactivation = [
         ["type" => "path", "path" => VP_VPDB_DIR . "/*"],
-        ["type" => "path", "path" => ABSPATH . WPINC . "/wp-db.php"],
-        ["type" => "path", "path" => ABSPATH . WPINC . "/wp-db.php.original"],
+        ["type" => "path", "path" => WpdbReplacer::$wpdbClassPath],
+        ["type" => "path", "path" => WpdbReplacer::$wpdbClassPath . ".original"],
         ["type" => "path", "path" => ABSPATH . "/.gitattributes"],
     ];
 

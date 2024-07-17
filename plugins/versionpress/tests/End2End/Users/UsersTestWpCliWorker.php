@@ -2,6 +2,7 @@
 
 namespace VersionPress\Tests\End2End\Users;
 
+use Exception;
 use Nette\Utils\Random;
 use Nette\Utils\Strings;
 use VersionPress\Tests\End2End\Utils\WpCliWorker;
@@ -27,7 +28,10 @@ class UsersTestWpCliWorker extends WpCliWorker implements IUsersTestWorker {
     }
 
     public function createUser() {
+        //try {
         $this->userId = $this->wpAutomation->createUser($this->testUser);
+        // } catch (Exception $e) {
+        // }
     }
 
     public function prepare_editUser() {

@@ -149,7 +149,7 @@ class StringUtils {
         if ($value === 'b:0;')
             return true;
 
-        return $result;
+        return $result !== false;
     }
 
     /**

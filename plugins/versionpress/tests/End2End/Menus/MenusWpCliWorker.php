@@ -65,6 +65,7 @@ class MenusTestWpCliWorker extends WpCliWorker implements IMenusTestWorker {
     }
 
     public function prepare_removeMenuItemWithChildren() {
+        $this->prepare_addMenuItem();
         $item = [$this->testPagesId, 'title' => 'Parent'];
         $this->lastInsertedItem = $parentId = $this->wpAutomation->addMenuItem($this->testMenuId, "post", $item);
 
