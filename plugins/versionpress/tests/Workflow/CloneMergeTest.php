@@ -31,9 +31,7 @@ class CloneMergeTest extends \PHPUnit\Framework\TestCase {
     public function cloneLooksExactlySameAsOriginal() {
         // Currently, we use an empty site as a basic test.
         $wpAutomation = new WpAutomation(self::$siteConfig, self::$testConfig->wpCliVersion);
-        $wpAutomation->setUpSite();
-        $wpAutomation->copyVersionPressFiles();
-        $wpAutomation->initializeVersionPress();
+        $wpAutomation->ensureTestSiteIsReady();
 
         FileSystem::mkdir(self::$cloneSiteConfig->path);
 
@@ -147,19 +145,27 @@ class CloneMergeTest extends \PHPUnit\Framework\TestCase {
      *
      */
     public function sitesAreNotMergedIfThereIsConflict() {
-        $cloneWpAutomation = new WpAutomation(self::$cloneSiteConfig, self::$testConfig->wpCliVersion);
-        $cloneWpAutomation->editOption('blogname', 'Blogname from clone - conflict');
 
         $wpAutomation = new WpAutomation(self::$siteConfig, self::$testConfig->wpCliVersion);
+        $wpAutomation->ensureTestSiteIsReady();
+        $cloneWpAutomation = new WpAutomation(self::$cloneSiteConfig, self::$testConfig->wpCliVersion);
+        FileSystem::mkdir(self::$cloneSiteConfig->path);
+
+        $wpAutomation->runWpCliCommand('vp', 'clone', [
+            'name' => self::$cloneSiteConfig->name,
+            'dbprefix' => self::$cloneSiteConfig->dbTablePrefix,
+            'yes' => null
+        ]);
+        $cloneWpAutomation->editOption('blogname', 'Blogname from clone - conflict');
         $wpAutomation->editOption('blogname', 'Blogname from original - conflict');
 
         VPCommandUtils::exec('git config user.name test', self::$siteConfig->path);
         VPCommandUtils::exec('git config user.email test@example.com', self::$siteConfig->path);
+        VPCommandUtils::exec('git config advice.mergeConflict false', self::$siteConfig->path);
 
         $output = $wpAutomation->runWpCliCommand('vp', 'pull', ['from' => self::$cloneSiteConfig->name]);
 
-        // $this->assertContains("Pull aborted", $output);
-        // TODO: fix this
+        $this->assertStringContainsString("Pull aborted", $output);
     }
 
     /**

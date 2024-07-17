@@ -500,15 +500,19 @@ class WpAutomation {
      * and extracted it there. Removes all old files if necessary.
      */
     private function prepareStandardWpInstallation() {
-        $this->runWpCliCommand(
-            'core',
-            'download',
-            array_merge([
-                'path' => $this->siteConfig->path,
-                'version' => $this->siteConfig->wpVersion,
-                'force' => null,
-            ], $this->siteConfig->wpLocale ? ['locale' => $this->siteConfig->wpLocale] : [])
-        );
+
+        if (!$this->folder_exist($this->siteConfig->path . '/wp-includes')) {
+            $this->runWpCliCommand(
+                'core',
+                'download',
+                array_merge([
+                    'insecure' => null,
+                    'path' => $this->siteConfig->path,
+                    'version' => $this->siteConfig->wpVersion,
+                    'force' => null,
+                ], $this->siteConfig->wpLocale ? ['locale' => $this->siteConfig->wpLocale] : [])
+            );
+        }
 
         $this->createConfigFile();
     }
@@ -769,5 +773,23 @@ class WpAutomation {
         }
 
         return $pluginsDir;
+    }
+    /**
+     * Checks if a folder exist and return canonicalized absolute pathname (long version)
+     * @param string $folder the path being checked.
+     * @return mixed returns the canonicalized absolute pathname on success otherwise FALSE is returned
+     */
+    private function folder_exist($folder) {
+        // Get canonicalized absolute pathname
+        $path = realpath($folder);
+
+        // If it exist, check if it's a directory
+        if ($path !== false and is_dir($path)) {
+            // Return canonicalized absolute pathname
+            return $path;
+        }
+
+        // Path/folder does not exist
+        return false;
     }
 }
