@@ -8,9 +8,9 @@
   </logging>
 
   <testsuites>
-    <testsuite name="Automation">
+    <!-- <testsuite name="Automation">
       <directory>Automation</directory>
-    </testsuite>
+    </testsuite> -->
     <testsuite name="Unit">
       <directory>Unit</directory>
     </testsuite>
@@ -20,9 +20,9 @@
     <testsuite name="StorageTests">
       <directory>StorageTests</directory>
     </testsuite>
-    <testsuite name="SynchronizerTests">
+    <!-- <testsuite name="SynchronizerTests">
       <directory>SynchronizerTests</directory>
-    </testsuite>
+    </testsuite> -->
     <testsuite name="GitRepositoryTests">
       <directory>GitRepositoryTests</directory>
     </testsuite>

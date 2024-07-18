@@ -74,12 +74,13 @@ class CloneMergeTest extends \PHPUnit\Framework\TestCase {
 
     /**
      * @test
+     * 
+     * Note: if this test is run singularly, it works!
      *
      * Creates a post and edits it (compatibly) in both environments. This leads to two different date modified's
      * but they should still merge fine if our merge driver works correctly.
      */
     public function dateModifiedMergesAutomatically() {
-        $internalCommandPath = __DIR__ . '/../../src/Cli/vp-internal.php';
 
         $wpAutomation = new WpAutomation(self::$siteConfig, self::$testConfig->wpCliVersion);
         $cloneWpAutomation = new WpAutomation(self::$cloneSiteConfig, self::$testConfig->wpCliVersion);
@@ -95,6 +96,8 @@ class CloneMergeTest extends \PHPUnit\Framework\TestCase {
             "post_author" => 1
         ];
         $postId = $wpAutomation->createPost($post);
+
+        $internalCommandPath = __DIR__ . '/../../src/Cli/vp-internal.php';
         $postVpId = $wpAutomation->runWpCliCommand(
             'vp-internal',
             'get-entity-vpid',
@@ -143,6 +146,8 @@ class CloneMergeTest extends \PHPUnit\Framework\TestCase {
     /**
      * @test
      *
+     * Note: if this test is run singularly, it works!
+     * 
      */
     public function sitesAreNotMergedIfThereIsConflict() {
 

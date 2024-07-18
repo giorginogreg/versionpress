@@ -1,7 +1,7 @@
 services:
 
   wordpress:
-    image: versionpress/wordpress:php7.2-apache@sha256:64b3c10adfef9ae65a140d5547d670d996c5c852b9a840c71a86a5be4f777fdc
+    image: versionpress/wordpress:php8.2-apache
     ports:
       - "80:80"
     volumes:
@@ -9,12 +9,12 @@ services:
       - ./dev-env/wp:/var/www/html:z
     links:
       - mysql
-      - adminer
+    #  - adminer
     environment:
       WORDPRESS_DB_PASSWORD: r00tpwd
 
   mysql:
-    image: mysql:5.7@sha256:1590f2540fd87e39605686873fb10206da4cbd7e83df2bc4110abe9fb740699e
+    image: mysql:8.0
     ports:
       - "3306:3306"
     volumes:
