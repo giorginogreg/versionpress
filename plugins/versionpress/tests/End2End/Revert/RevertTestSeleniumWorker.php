@@ -164,7 +164,7 @@ class RevertTestSeleniumWorker extends SeleniumWorker implements IRevertTestWork
         ];
 
         $postId = self::$wpAutomation->createPost($post);
-        (new Process('echo foo'))->run();
+        (Process::fromShellCommandline('echo foo'))->run();
         return $postId;
     }
 
@@ -181,7 +181,7 @@ class RevertTestSeleniumWorker extends SeleniumWorker implements IRevertTestWork
         ];
 
         $commentId = self::$wpAutomation->createComment($comment);
-        (new Process('echo foo'))->run();
+        (Process::fromShellCommandline('echo foo'))->run();
         return $commentId;
     }
 

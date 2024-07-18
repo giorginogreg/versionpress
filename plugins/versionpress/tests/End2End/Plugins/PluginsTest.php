@@ -63,7 +63,7 @@ class PluginsTest extends End2EndTestCase {
         } catch (\Exception $e) {
         }
 
-        $process = new Process(
+        $process = Process::fromShellCommandline(
             "git add -A && git commit -m " . ProcessUtils::escapeshellarg("Plugin setup"),
             self::$testConfig->testSite->path
         );

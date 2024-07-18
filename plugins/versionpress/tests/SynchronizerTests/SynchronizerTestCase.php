@@ -94,7 +94,7 @@ class SynchronizerTestCase extends \PHPUnit\Framework\TestCase {
     }
 
     public static function tearDownAfterClass(): void {
-        $process = new Process(
+        $process = Process::fromShellCommandline(
             "git add -A && git commit -m " . ProcessUtils::escapeshellarg("Committed changes made by " . static::class),
             self::$testConfig->testSite->path
         );

@@ -15,7 +15,7 @@
     "php": "^5.6 || ^7.0 || ^8.0",
     "nette/utils": "^2.4",
     "symfony/yaml": "^3",
-    "symfony/process": "^3.3",
+    "symfony/process": "^7",
     "michelf/php-markdown": "2.0.0",
     "symfony/filesystem": "^3.3",
     "phpmyadmin/sql-parser": "^5.9",

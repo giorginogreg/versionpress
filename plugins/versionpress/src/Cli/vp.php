@@ -642,7 +642,7 @@ class VPCommand extends WP_CLI_Command {
         }
 
         if (isset($assoc_args['continue'])) {
-            $process = new Process('git diff --name-only --diff-filter=U', VP_PROJECT_ROOT);
+            $process = Process::fromShellCommandline('git diff --name-only --diff-filter=U', VP_PROJECT_ROOT);
             $process->run();
 
             if ($process->getConsoleOutput() !== '') {

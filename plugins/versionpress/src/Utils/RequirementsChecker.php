@@ -212,7 +212,7 @@ class RequirementsChecker {
 
     private function tryRunProcess() {
         try {
-            $process = new Process("echo test");
+            $process = Process::fromShellCommandline("echo test");
             $process->run();
             return true;
         } catch (Exception $e) {
@@ -250,7 +250,7 @@ class RequirementsChecker {
             FileSystem::remove($filePath);
 
             // Trying to create file from process (issue #522)
-            $process = new Process(sprintf("echo test > %s", ProcessUtils::escapeshellarg($filePath)));
+            $process = Process::fromShellCommandline(sprintf("echo test > %s", ProcessUtils::escapeshellarg($filePath)));
             $process->run();
             $writable &= is_file($filePath);
 
