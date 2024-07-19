@@ -27,7 +27,7 @@
     "mikey179/vfsstream": "dev-master",
     "10up/wp_mock": "^0.1.1",
     "phpunit/phpunit-selenium": "^9.0",
-    "icecave/semver": "^3.0",
+    "composer/semver": "^3.0",
     "fakerphp/faker": "^1.23",
     "rector/rector": "^1.2"
   },
