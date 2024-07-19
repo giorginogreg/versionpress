@@ -488,6 +488,7 @@ class VPCommand extends WP_CLI_Command {
 
         if (!$process->isSuccessful()) {
             WP_CLI::error($process->getConsoleOutput(), false);
+            WP_CLI::warning("debug command: " . $cloneCommand);
             WP_CLI::error("Cloning Git repo failed");
         } else {
             WP_CLI::success("Site files cloned");
@@ -658,6 +659,8 @@ class VPCommand extends WP_CLI_Command {
 
         $remote = isset($assoc_args['from']) ? $assoc_args['from'] : 'origin';
 
+        VPCommandUtils::exec('git config user.name site');
+        VPCommandUtils::exec('git config user.email site@example.com');
         $process = VPCommandUtils::exec("git config --get remote." . ProcessUtils::escapeshellarg($remote) . ".url");
         $remoteUrl = $process->getConsoleOutput();
 
