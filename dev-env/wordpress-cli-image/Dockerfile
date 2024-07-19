@@ -11,9 +11,8 @@ FROM wordpress:cli
 # Switching to root first, `wordpress:cli` sets the user to www-data.
 USER root
 
-#COPY cert_custom.pem /usr/local/share/ca-certificates/cert_custom.crt
-#RUN  update-ca-certificates
-#
+COPY cert_custom.pem /usr/local/share/ca-certificates/cert_custom.crt
+RUN  update-ca-certificates
 
 # Install newer version of Git, required for VersionPress.
 RUN apk update && apk add --no-cache git
