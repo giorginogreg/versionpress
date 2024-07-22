@@ -375,7 +375,7 @@ class SerializedDataToIniConverter {
         foreach ($relatedLines as $relatedKey => $value) {
 
             // Certains keys in the ini were not including brackets, so checking before is a good way
-            if (!Strings::startsWith('[', $relatedKey) && !Strings::endsWith(']', $relatedKey)) continue;
+            if (!Strings::startsWith($relatedKey, '[') && !Strings::endsWith($relatedKey, ']')) continue;
 
             $indexAfterFirstOpeningBracket = strpos($relatedKey, '[') + 1;
             $indexOfFirstClosingBracket = strpos($relatedKey, ']');
