@@ -150,7 +150,7 @@ class UsersTestSeleniumWorker extends SeleniumWorker implements IUsersTestWorker
             return $user->user_login;
         }, $users);
         $usersForBulkTests = array_filter($userLogins, function ($login) {
-            return Strings::startsWith($login, 'bulk_');
+            return str_starts_with($login, 'bulk_');
         });
         self::$wpAutomation->runWpCliCommand('user', 'delete', array_merge($usersForBulkTests, ['yes' => null]));
     }

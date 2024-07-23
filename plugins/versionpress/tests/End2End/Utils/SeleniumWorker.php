@@ -243,7 +243,7 @@ class SeleniumWorker implements ITestWorker {
         try {
             $this->executeScript("tinyMCE.activeEditor.setContent('$text')");
         } catch (WebDriverException $ex) {
-            if (!Strings::startsWith($ex->getMessage(), "TypeError: c is undefined")) {
+            if (!str_starts_with($ex->getMessage(), "TypeError: c is undefined")) {
                 throw $ex;
             }
         }

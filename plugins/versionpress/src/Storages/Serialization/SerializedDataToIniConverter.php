@@ -304,7 +304,7 @@ class SerializedDataToIniConverter {
             return 'r:' . $value . ';';
         }
 
-        if (Strings::startsWith($value, '"')) {
+        if (str_starts_with($value, '"')) {
             // plain serialized strings are in quotes because of `<<<serialized>>> "string"`
             $value = preg_replace('/^"(.*)"$/', '$1', $value);
         }
@@ -375,7 +375,7 @@ class SerializedDataToIniConverter {
         foreach ($relatedLines as $relatedKey => $value) {
 
             // Certains keys in the ini were not including brackets, so checking before is a good way
-            if (!Strings::startsWith($relatedKey, '[') && !Strings::endsWith($relatedKey, ']')) continue;
+            if (!str_starts_with($relatedKey, '[') && !Strings::endsWith($relatedKey, ']')) continue;
 
             $indexAfterFirstOpeningBracket = strpos($relatedKey, '[') + 1;
             $indexOfFirstClosingBracket = strpos($relatedKey, ']');
@@ -383,7 +383,7 @@ class SerializedDataToIniConverter {
 
             $subkey = substr($relatedKey, $indexAfterFirstOpeningBracket, $keyLength);
 
-            if (!Strings::startsWith($subkey, '"')) {
+            if (!str_starts_with($subkey, '"')) {
                 $subkey += 0; // convert to number
             }
 
@@ -420,7 +420,7 @@ class SerializedDataToIniConverter {
         $lengthOfCommonPart = strlen($commonKey);
 
         foreach ($maybeRelatedKeys as $key => $value) {
-            if (Strings::startsWith($key, $commonKey) && $key !== $commonKey) {
+            if (str_starts_with($key, $commonKey) && $key !== $commonKey) {
                 $rel[substr($key, $lengthOfCommonPart)] = $value;
             }
         }

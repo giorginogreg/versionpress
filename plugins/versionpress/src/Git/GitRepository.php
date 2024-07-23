@@ -467,7 +467,7 @@ class GitRepository {
     private function runShellCommand($command, ...$args) {
 
         // replace (optional) "git " with the configured git binary
-        $command = Strings::startsWith($command, "git ") ? substr($command, 4) : $command;
+        $command = str_starts_with($command, "git ") ? substr($command, 4) : $command;
         $command = ProcessUtils::escapeshellarg($this->gitBinary) . " " . $command;
 
         $escapedArgs = @array_map([\VersionPress\Utils\ProcessUtils::class, 'escapeshellarg'], $args);

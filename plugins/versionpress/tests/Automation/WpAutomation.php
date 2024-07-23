@@ -630,7 +630,7 @@ class WpAutomation {
      * @return string
      */
     private function possiblyRewriteWpCliCommand($command) {
-        if (!Strings::startsWith($command, "wp ")) {
+        if (!str_starts_with($command, "wp ")) {
             return $command;
         }
 
