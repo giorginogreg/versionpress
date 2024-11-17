@@ -5,8 +5,8 @@ RUN apt-get update \
   && apt-get install -y git \
   && rm -rf /var/lib/apt/lists/*
 
-COPY cert_custom.pem /usr/local/share/ca-certificates/cert_custom.crt
-RUN  update-ca-certificates
+#COPY cert_custom.pem /usr/local/share/ca-certificates/cert_custom.crt
+#RUN  update-ca-certificates
 
 
 # Install WP-CLI

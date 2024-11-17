@@ -9,9 +9,15 @@ services:
       - ./dev-env/wp:/var/www/html:z
     links:
       - mysql
+    build:
+      context: .
+      dockerfile: dev-env/wordpress-image/Dockerfile
     #  - adminer
     environment:
+      WORDPRESS_DB_HOST: mysql
+      WORDPRESS_DB_USER: root
       WORDPRESS_DB_PASSWORD: r00tpwd
+      WORDPRESS_DEBUG: true
 
   mysql:
     image: mysql:8.0

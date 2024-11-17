@@ -1,6 +1,6 @@
 FROM wordpress:cli
 
-# IMPORTANT: this image is Apline-based where www-data is UID 82 while in Debian-based WordPress image,
+# IMPORTANT: this image is Alpine-based where www-data is UID 82 while in Debian-based WordPress image,
 # it's 33. Both will be reading and writing to `/var/www/html` so we'll be using UID 33 in this Dockerfile
 # to avoid any permission issues. See e.g. docker-library/wordpress#256.
 #
@@ -11,8 +11,8 @@ FROM wordpress:cli
 # Switching to root first, `wordpress:cli` sets the user to www-data.
 USER root
 
-COPY cert_custom.pem /usr/local/share/ca-certificates/cert_custom.crt
-RUN  update-ca-certificates
+# COPY cert_custom.pem /usr/local/share/ca-certificates/cert_custom.crt
+# RUN  update-ca-certificates
 
 # Install newer version of Git, required for VersionPress.
 RUN apk update && apk add --no-cache git
