@@ -27,6 +27,7 @@ services:
       - db-data:/var/lib/mysql:z
     environment:
       MYSQL_ROOT_PASSWORD: r00tpwd
+      MYSQL_DATABASE: wordpress
   #adminer:
   #  image: adminer@sha256:0e245b5550d7710ebfe728e682804947e2edade4d7f3313e7066b4629b728c5c
   #  ports:
